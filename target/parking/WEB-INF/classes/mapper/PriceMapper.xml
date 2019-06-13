@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lcr.dao.PriceDao">
+    <resultMap type="com.lcr.entity.Price" id="Price">
+        <id property="id" column="id" />
+        <result property="count" column="count" />
+        <result property="date" column="date" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.lcr.dao.PriceDao">
+         INSERT INTO price(id,count,date)
+        VALUES(#{id},#{count},#{date});
+    </insert>
+
+    <update id="update" parameterType="com.lcr.dao.PriceDao">
+        UPDATE price SET count=#{count}
+        WHERE date=#{date}
+    </update>
+
+    <select id="queryByDate" resultType="com.lcr.entity.Price" parameterType="com.lcr.dao.PriceDao">
+        SELECT * FROM price
+        WHERE date=#{date};
+    </select>
+</mapper>

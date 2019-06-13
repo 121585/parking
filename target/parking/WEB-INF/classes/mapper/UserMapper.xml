@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lcr.dao.UserDao">
+    <resultMap type="com.lcr.entity.User" id="User">
+        <id property="id" column="id" />
+        <result property="username" column="username" />
+        <result property="password" column="password" />
+        <result property="email" column="email" />
+        <result property="phone" column="phone" />
+        <result property="type" column="type" />
+        <result property="image" column="image" />
+        <result property="remarks" column="remarks" />
+        <result property="state" column="state" />
+        <result property="code" column="code" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.lcr.dao.UserDao">
+         INSERT INTO user (username,password,email,phone,type,image,,remarks,state,code)
+        VALUES(#{username},#{password},#{email},#{phone},#{image},#{remarks},#{state},#{code});
+    </insert>
+
+ <!--   <update id="update" parameterType="com.lcr.dao.UserDao">
+        UPDATE user SET password=#{password},email=#{email},phone=#{phone},image=#{image},remarks=#{remarks}
+        WHERE id=#{id};
+    </update>-->
+
+    <update id="update" parameterType="com.lcr.entity.User">
+        update user
+        <set>
+            username = #{username,jdbcType=VARCHAR},
+            password=#{password,jdbcType=VARCHAR},
+            email=#{email,jdbcType=VARCHAR},
+            phone=#{phone,jdbcType=VARCHAR},
+            image=#{image,jdbcType=VARCHAR},
+            remarks=#{remarks,jdbcType=VARCHAR}
+        </set>
+        where id=#{id};
+    </update>
+
+
+    <select id="queryById" resultType="com.lcr.entity.User" parameterType="com.lcr.dao.UserDao">
+        SELECT * FROM user
+        WHERE id=#{id};
+    </select>
+
+    <select id="queryByNameOrEmail" resultType="com.lcr.entity.User" parameterType="com.lcr.dao.UserDao">
+        SELECT * FROM user
+        WHERE username=#{username} or email=#{email} and password=#{password};
+    </select>
+
+</mapper>
