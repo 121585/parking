@@ -8,22 +8,21 @@
         <id property="id" column="id" />
         <result property="username" column="username" />
         <result property="password" column="password" />
+        <result property="carNumber" column="carNumber"/>
         <result property="email" column="email" />
         <result property="phone" column="phone" />
         <result property="type" column="type" />
         <result property="image" column="image" />
         <result property="remarks" column="remarks" />
-        <result property="state" column="state" />
-        <result property="code" column="code" />
     </resultMap>
 
     <insert id="insert" parameterType="com.lcr.dao.UserDao">
-         INSERT INTO user (username,password,email,phone,type,image,,remarks,state,code)
-        VALUES(#{username},#{password},#{email},#{phone},#{image},#{remarks},#{state},#{code});
+         INSERT INTO user (username,password,carNumber,email,phone,type,image,remarks)
+        VALUES(#{username},#{password},#{carNumber},#{email},#{phone},#{type},#{image},#{remarks});
     </insert>
 
- <!--   <update id="update" parameterType="com.lcr.dao.UserDao">
-        UPDATE user SET password=#{password},email=#{email},phone=#{phone},image=#{image},remarks=#{remarks}
+    <!--<update id="update" parameterType="com.lcr.dao.UserDao">
+        UPDATE user SET password=#{password},carNumber=#{carNumber},email=#{email},phone=#{phone},image=#{image},remarks=#{remarks}
         WHERE id=#{id};
     </update>-->
 
@@ -32,6 +31,7 @@
         <set>
             username = #{username,jdbcType=VARCHAR},
             password=#{password,jdbcType=VARCHAR},
+            carNumber=#{carNumber,jdbcType=VARCHAR},
             email=#{email,jdbcType=VARCHAR},
             phone=#{phone,jdbcType=VARCHAR},
             image=#{image,jdbcType=VARCHAR},

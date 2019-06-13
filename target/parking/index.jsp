@@ -28,7 +28,6 @@
 <%-- 登录 --%>
 <script>
     $(document).ready(function () {
-
         $('#toLogin').click(function () {
             debugger
             var username = $("#username").val();
@@ -58,7 +57,14 @@
                 },
                 success: function (data) {
                     if (data.success == true) {
-                        window.location.href = "/userIndex.jsp";
+                        debugger
+                        if(data.type==0){
+                            window.location.href= "/userIndex.jsp";
+                        }else if(data.type==1){
+                            window.location.href= "/menWeiIndex.jsp";
+                        }else  if(data.type==2){
+                            window.location.href= "/adminIndex.jsp";
+                        }
                     } else if (data.success == false) {
                         alert("错误,用户名或者密码错误！");
                         return;
@@ -186,8 +192,11 @@
                                     style="color: red">*</a>
                                 <div class="col-sm-6">
                                     <input type="password" class="form-control" id="repwd" placeholder="请确认密码"
-                                           required onkeyup="validate()"/><span id="tishi"></span>
+                                           required "/><span id="tishi"></span>
                                 </div>
+                            </div>
+                            <div>
+                                <div id="type" style="display: none; " hidden></div>
                             </div>
                             <div class="form-group">
                                 <label for="email" class="col-sm-2 control-label">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱</label><a

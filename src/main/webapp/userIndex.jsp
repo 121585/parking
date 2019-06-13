@@ -35,6 +35,7 @@
             $("#upt").click(function () {
                 $('#uptModal').modal('show');
                 var id = '${sessionScope.user.id}';
+                alert(id);
                 $.ajax({
                     url: "/upt",
                     data: {"id":id},
@@ -45,6 +46,7 @@
                             /* 赋值 */
                             $("#username").val(data.user.username);
                             $("#pwd").val(data.user.password);
+                            $("#carNumber").val(data.user.carNumber);
                             $("#email").val(data.user.email);
                             $("#phone").val(data.user.phone);
                             $("#image").val(data.user.image);
@@ -62,6 +64,7 @@
                 var id = $("#id").val();
                 var username = $("#username").val();
                 var pwd = $("#pwd").val();
+                var carNumber = $("#carNumber").val();
                 var email = $("#email").val();
                 var phone = $("#phone").val();
                 var image = $("#image").val();
@@ -74,7 +77,7 @@
                 /* 发送ajax请求 */
                 $.ajax({
                     url: "/doUpt",
-                    data: {'username':username,'password':pwd,'email':email,'phone':phone,'image':image,'remarks':remarks,'id':id},
+                    data: {'username':username,'password':pwd,'carNumber':carNumber,'email':email,'phone':phone,'image':image,'remarks':remarks,'id':id},
                     type: "post",
                     success: function (data) {
                         debugger
@@ -176,9 +179,9 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">确认密码</label>
+                                    <label class="col-sm-2 control-label">车牌号</label>
                                     <div class="col-sm-6">
-                                        <input type="password" class="form-control" id="repwd"/>
+                                        <input type="text" class="form-control" id="carNumber"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -197,7 +200,6 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">头&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;像</label>
                                     <div class="col-sm-6">
-                                        ${session.user.image}<br/>
                                         <button id="image"><span></span>点击修改头像</button>
                                     </div>
                                 </div>

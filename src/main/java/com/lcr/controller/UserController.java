@@ -26,14 +26,22 @@ public class UserController {
      */
     @RequestMapping("/login")
     @ResponseBody
-    public Map<String, Object> login(String username, String password, String email, HttpServletRequest request) {
+    public Map<String, Object> login(String username, String password, String email, HttpSession session) {
         Map<String, Object> map = new HashMap();
         User user = userService.login(username, password, email);
-        HttpSession session = request.getSession(true);
         session.setAttribute("user", user);
         if (user != null) {
             map.put("success", true);
-        } else {
+            if (user.getType()==0){
+                map.put("type", 0);//普通用户
+            }
+            if (user.getType()==1){
+                map.put("type", 1);//门卫
+            }
+            if (user.getType()==2){
+                map.put("type", 2);//管理员
+            }
+        }else {
             map.put("success", false);
         }
         return map;
@@ -47,7 +55,7 @@ public class UserController {
      */
     @RequestMapping("/exit")
     @ResponseBody
-    public Map<String, Object> exit(String name,HttpSession session) {
+    public Map<String, Object> exit(String name, HttpSession session) {
         Map<String, Object> map = new HashMap();
         session.invalidate();
         map.put("success", true);
@@ -59,25 +67,28 @@ public class UserController {
      */
     @RequestMapping("/upt")
     @ResponseBody
-    public Map<String, Object> upt(int id){
+    public Map<String, Object> upt(int id) {
         Map<String, Object> map = new HashMap();
         User user = userService.queryById(id);
-        if(user != null){
-            map.put("user",user);
-            map.put("success",true);
+        if (user != null) {
+            map.put("user", user);
+            map.put("success", true);
         }
         return map;
     }
 
     @RequestMapping("/doUpt")
     @ResponseBody
-    public Map<String, Object> doUpt(User user){
+    public Map<String, Object> doUpt(User user) {
         Map<String, Object> map = new HashMap();
+        System.out.println(user.getCarNumber());
+
         int i = userService.update(user);
-        if (i>0){
-            map.put("success",true);
-        }else {
-            map.put("success",false);
+        System.out.println("i = " + i);
+        if (i > 0) {
+            map.put("success", true);
+        } else {
+            map.put("success", false);
         }
         return map;
     }

@@ -14,7 +14,7 @@ public interface UserDao {
     public int insert(User user);
 
     /***
-     * 更新用户,当设置state为3时表示删除用户
+     * 更新用户
      * @param user
      * @return
      */
