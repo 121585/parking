@@ -102,8 +102,9 @@
                     'remarks': remarks
                 },
                 success: function (data) {
+                    alert(data.success);
                     if (data.success == true) {
-                        $('#uptRegister').modal('hide');
+                        $('#register').modal('hide');
                         alert("注册成功，请登录！");
                         location.reload();
                     }
