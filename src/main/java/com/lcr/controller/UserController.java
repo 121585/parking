@@ -92,4 +92,17 @@ public class UserController {
         }
         return map;
     }
+
+    @RequestMapping("/doAdd")
+    @ResponseBody
+    public Map<String, Object> doAdd(User user) {
+        Map<String, Object> map = new HashMap();
+        int i = userService.insert(user);
+        if (i > 0) {
+            map.put("success", true);
+        } else {
+            map.put("success", false);
+        }
+        return map;
+    }
 }

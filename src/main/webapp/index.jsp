@@ -33,7 +33,7 @@
 <script>
     $(document).ready(function () {
         $('#toLogin').click(function () {
-            var username = $("#username").val();
+            var username = $("#name").val();
             var password = $("#password").val();
             var email = "";
             /* 判断空字符串 */
@@ -41,12 +41,9 @@
                 alert("错误，用户名或者密码为空！");
                 return;
             }
-            debugger
             /* 判断登录时使用的是用户名还是邮箱 */
             if (username.indexOf("@") == -1) {
-
             } else {
-
                 email = username;
             }
             /* 发送ajax请求 */
@@ -60,13 +57,12 @@
                 },
                 success: function (data) {
                     if (data.success == true) {
-                        debugger
-                        if(data.type==0){
-                            window.location.href= "/userIndex.jsp";
-                        }else if(data.type==1){
-                            window.location.href= "/menWeiIndex.jsp";
-                        }else  if(data.type==2){
-                            window.location.href= "/adminIndex.jsp";
+                        if (data.type == 0) {
+                            window.location.href = "/userIndex.jsp";
+                        } else if (data.type == 1) {
+                            window.location.href = "/menWeiIndex.jsp";
+                        } else if (data.type == 2) {
+                            window.location.href = "/adminIndex.jsp";
                         }
                     } else if (data.success == false) {
                         alert("错误,用户名或者密码错误！");
@@ -75,7 +71,49 @@
                 }
             });
         })
+        /* 注册用户 */
+        $("#toRegister").click(function () {
+            /* 取值 */
+            var username = $("#name").val();
+            debugger
+            var pwd = $("#pwd").val();
+            if (pwd == null || pwd =="") {
+                alert("密码不能为空");
+                return;
+            }
+            var carNumber = $("#carNumber").val();
+            var email = $("#email").val();
+            var phone = $("#phone").val();
+            var image = $("#image").val();
+            var remarks = $("#remarks").val();
+            /* 非空判断 */
+
+            /* 发送ajax请求 */
+            $.ajax({
+                url: "/doAdd",
+                type: "post",
+                data: {
+                    'username': username,
+                    'password': pwd,
+                    'carNumber': carNumber,
+                    'email': email,
+                    'phone': phone,
+                    'image': image,
+                    'remarks': remarks
+                },
+                success: function (data) {
+                    if (data.success == true) {
+                        $('#uptRegister').modal('hide');
+                        alert("注册成功，请登录！");
+                        location.reload();
+                    }
+                }
+
+            });
+        })
     });
+
+
 </script>
 <!-- WRAPPER -->
 <div id="wrapper">
@@ -90,12 +128,12 @@
                         </div>
                         <form class="form-auth-small" action="index.php">
                             <div class="form-group">
-                                <label  class="control-label sr-only">Email</label>
-                                <input type="email" class="form-control" id="username" value="" placeholder="Email or usernamex`">
+                                <input type="email" class="form-control" id="username" value=""
+                                       placeholder="Email or Username">
                             </div>
                             <div class="form-group">
-                                <label  class="control-label sr-only">Password</label>
-                                <input type="password" class="form-control" id="password" value="" placeholder="Password">
+                                <input type="password" class="form-control" id="password" value=""
+                                       placeholder="Password">
                             </div>
                             <div class="form-group clearfix">
                                 <label class="fancy-checkbox element-left">
@@ -104,9 +142,12 @@
                                 </label>
                             </div>
                             <button type="button" class="btn btn-primary btn-lg btn-block" id="toLogin">LOGIN</button>
-                            <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#register">REGISTER</button>
+                            <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal"
+                                    data-target="#register">REGISTER
+                            </button>
                             <div class="bottom">
-                                <span class="helper-text"><i class="fa fa-lock"></i> <a href="#">Forgot password?</a></span>
+                                <span class="helper-text"><i class="fa fa-lock"></i> <a
+                                        href="#">Forgot password?</a></span>
                             </div>
                         </form>
                     </div>
@@ -137,25 +178,27 @@
                         <div class="col-md-12 col-md-offset-2 column">
                             <form class="form-horizontal" role="form">
                                 <div class="form-group">
-                                    <label for="name" class="col-sm-2 control-label">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</label><a
+                                    <label class="col-sm-2 control-label">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</label><a
                                         style="color: red">*</a>
                                     <div class="col-sm-6">
-                                        <input type="email" class="form-control" id="name" placeholder="请输入用户名" required/>
+                                        <input type="email" class="form-control" id="name" placeholder="请输入用户名"
+                                               required/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="pwd" class="col-sm-2 control-label">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</label><a
                                         style="color: red">*</a>
                                     <div class="col-sm-6">
-                                        <input type="password" class="form-control" id="pwd" placeholder="请输入密码" required/>
+                                        <input type="password" class="form-control" id="pwd" placeholder="请输入密码"
+                                               required/>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="repwd" class="col-sm-2 control-label">确认密码</label><a
+                                    <label class="col-sm-2 control-label">车牌号</label><a
                                         style="color: red">*</a>
                                     <div class="col-sm-6">
-                                        <input type="password" class="form-control" id="repwd" placeholder="请确认密码"
-                                               required /><span id="tishi"></span>
+                                        <input type="password" class="form-control" id="carNumber" placeholder="请输入车牌号"
+                                               required/><span id="tishi"></span>
                                     </div>
                                 </div>
                                 <div>
@@ -173,13 +216,15 @@
                                     <label for="phone" class="col-sm-2 control-label">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话</label><a
                                         style="color: red">*</a>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control" id="phone" placeholder="请输入电话号码" required/>
+                                        <input type="text" class="form-control" id="phone" placeholder="请输入电话号码"
+                                               required/>
                                     </div>
                                 </div>
+
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">头&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;像</label>
                                     <div class="col-sm-6">
-                                        <button><span></span>点击上传头像</button>
+                                        <button id="image"><span></span>点击上传头像</button>
                                     </div>
                                 </div>
 
@@ -196,7 +241,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary" id="toAdd">提交</button>
+                    <button type="button" class="btn btn-primary" id="toRegister">注册</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

@@ -38,8 +38,15 @@ public class UserService {
      * @param user
      * @return
      */
-    public int update(User user){
+    public int update(User user) {
         int i = userDao.update(user);
         return i;
     }
+
+    public int insert(User user){
+        int i = userDao.insert(user);
+        return i;
+    };
+
+
 }

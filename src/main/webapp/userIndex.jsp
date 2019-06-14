@@ -5,17 +5,36 @@
 <%@ taglib prefix="background" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <!-- 新 Bootstrap 核心 CSS 文件 -->
-    <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <!-- 可选的Bootstrap主题文件（一般不使用） -->
-    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
-    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <title>Home</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- VENDOR CSS -->
+    <script href="assets/vendor/jquery/jquery.min.js"></script>
+    <script href="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/vendor/linearicons/style.css">
+    <link rel="stylesheet" href="assets/vendor/chartist/css/chartist-custom.css">
     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script href="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+    <link rel="stylesheet" href="assets/css/demo.css">
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+    <!-- ICONS -->
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
+
+
+
+
     <script>
         $(document).ready(function () {
+
             /* 退出登录 */
             $("#exit").click(function () {
                 /* 发送ajax请求 */
@@ -35,7 +54,6 @@
             $("#upt").click(function () {
                 $('#uptModal').modal('show');
                 var id = '${sessionScope.user.id}';
-                alert(id);
                 $.ajax({
                     url: "/upt",
                     data: {"id":id},
@@ -57,7 +75,6 @@
                 });
 
             });
-
             /* 修改用户 */
             $("#doUpt").click(function () {
                 /* 取值 */
@@ -90,68 +107,122 @@
 
                 });
             })
+
         })
+
+
+
     </script>
 </head>
-<body>
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span12">
-            <blockquote class="pull-right" style="border-right: 0px; ">
-                <p>
-                <div>
-                    <div style="display: inline; float: left">
-                        <iframe width="450" scrolling="no" height="18" frameborder="0" allowtransparency="true"
-                                src="//i.tianqi.com/index.php?c=code&id=1&icon=1&wind=1&num=2&site=12"></iframe>
-                    </div>
-                    <div style="display: inline">
-                        <button id="upt">${sessionScope.user.username} </button>
-                    </div>
-                    <div style="display: inline"><button id="exit">退出</button></div>
-                </div>
-                </p>
-            </blockquote>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>
-                        <span>已预约数</span>
-                    </th>
-                    <th>
-                        <span>剩余可预约数</span>
-                    </th>
-                    <th>
-                        <span>今日收费金额</span>
-                    </th>
-                    <th>
-                        操作
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr class="info">
-                    <td>
-                        1
-                    </td>
-                    <td>
-                        TB - Monthly
-                    </td>
-                    <td>
-                        01/04/2012
-                    </td>
-                    <td>
-                        <a href="">预约</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
 
+<body>
+<!-- WRAPPER -->
+<div id="wrapper">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="brand">
+            <a href="index.html"><img src="assets/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"></a>
+        </div>
+        <div class="container-fluid">
+            <div class="navbar-btn">
+                <button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+            </div>
+
+
+            <div id="navbar-menu">
+                <ul class="nav navbar-nav navbar-right">
+
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/img/user.png" class="img-circle" alt="Avatar"> <span>${sessionScope.user.username}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li ><a  ><i class="lnr lnr-cog"></i> <span id="upt">修改信息</span></a></li>
+                            <li><a ><i class="lnr lnr-exit"></i> <span id="exit">退出登录</span></a></li>
+                        </ul>
+                    </li>
+                    <!-- <li>
+                        <a class="update-pro" href="#downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- END NAVBAR -->
+    <!-- LEFT SIDEBAR -->
+    <div id="sidebar-nav" class="sidebar">
+        <div class="sidebar-scroll">
+            <nav>
+                <ul class="nav">
+                    <li><a href="userIndex.jsp" class="active"><i class="lnr lnr-home"></i> <span>预约管理</span></a></li>
+
+                </ul>
+            </nav>
         </div>
     </div>
-</div>
-<%-- 修改模态框 --%>
-<div class="container">
 
+    <!-- END LEFT SIDEBAR -->
+    <!-- MAIN -->
+    <div class="main">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <blockquote class="pull-right" style="border-right: 0px; ">
+
+                    </blockquote>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>
+                                <span>已预约数</span>
+                            </th>
+                            <th>
+                                <span>剩余可预约数</span>
+                            </th>
+                            <th>
+                                <span>今日收费金额</span>
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="info">
+                            <td>
+                                1
+                            </td>
+                            <td>
+                                TB - Monthly
+                            </td>
+                            <td>
+                                01/04/2012
+                            </td>
+                            <td>
+                                <a href="">预约</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- END MAIN -->
+
+
+    <!-- END WRAPPER -->
+    <!-- Javascript -->
+    <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+    <script src="assets/vendor/chartist/js/chartist.min.js"></script>
+    <script src="assets/scripts/klorofil-common.js"></script>
+
+    <%-- 修改模态框 --%>
 
     <div id="uptModal" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -223,7 +294,8 @@
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-</div>
+
+    </div>
 </body>
+
 </html>

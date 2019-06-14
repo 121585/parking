@@ -17,8 +17,8 @@
     </resultMap>
 
     <insert id="insert" parameterType="com.lcr.dao.UserDao">
-         INSERT INTO user (username,password,carNumber,email,phone,type,image,remarks)
-        VALUES(#{username},#{password},#{carNumber},#{email},#{phone},#{type},#{image},#{remarks});
+         INSERT INTO user (username,password,carNumber,email,phone,image,remarks)
+        VALUES(#{username},#{password},#{carNumber},#{email},#{phone},#{image},#{remarks});
     </insert>
 
     <!--<update id="update" parameterType="com.lcr.dao.UserDao">
